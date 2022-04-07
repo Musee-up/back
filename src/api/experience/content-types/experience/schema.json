@@ -50,17 +50,6 @@
       ],
       "default": "A pied"
     },
-    "topic": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "Balade Culturelle"
-      ]
-    },
     "duration": {
       "pluginOptions": {
         "i18n": {
@@ -114,6 +103,47 @@
       },
       "type": "boolean",
       "default": true
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "languages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::language.language"
+    },
+    "groupSize": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer",
+      "default": 1,
+      "min": 1
+    },
+    "themes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::theme.theme"
+    },
+    "location": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
