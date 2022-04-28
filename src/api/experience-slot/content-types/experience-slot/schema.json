@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "experience_slots",
+  "info": {
+    "singularName": "experience-slot",
+    "pluralName": "experience-slots",
+    "displayName": "experienceSlot",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "experience": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::experience.experience",
+      "inversedBy": "experience_slots"
+    },
+    "guide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide.guide",
+      "inversedBy": "experience_slots"
+    }
+  }
+}

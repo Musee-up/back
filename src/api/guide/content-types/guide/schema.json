@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guides",
+  "info": {
+    "singularName": "guide",
+    "pluralName": "guides",
+    "displayName": "guide",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience.experience"
+    },
+    "experience_slots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience-slot.experience-slot",
+      "mappedBy": "guide"
+    }
+  }
+}

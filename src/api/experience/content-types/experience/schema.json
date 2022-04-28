@@ -144,6 +144,12 @@
         }
       },
       "type": "string"
+    },
+    "experience_slots": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience-slot.experience-slot",
+      "mappedBy": "experience"
     }
   }
 }
