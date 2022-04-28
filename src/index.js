@@ -25,6 +25,7 @@ module.exports = {
                     where: { id: root.id },
                     populate: { guide: true },
                   });
+                console.log(userData.guide)
                 return toEntityResponse(userData.guide, { args, resourceUID:"api::guide.guide" }) 
               },
             });
