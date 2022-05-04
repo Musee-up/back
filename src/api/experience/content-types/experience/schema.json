@@ -150,6 +150,11 @@
       "relation": "oneToMany",
       "target": "api::experience-slot.experience-slot",
       "mappedBy": "experience"
+    },
+    "types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience-type.experience-type"
     }
   }
 }
