@@ -12,15 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "experiences": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::experience.experience"
-    },
     "experience_slots": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::experience-slot.experience-slot",
+      "mappedBy": "guide"
+    },
+    "experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience.experience",
       "mappedBy": "guide"
     }
   }

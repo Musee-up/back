@@ -155,6 +155,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::experience-type.experience-type"
+    },
+    "guide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide.guide",
+      "inversedBy": "experiences"
     }
   }
 }

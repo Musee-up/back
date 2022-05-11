@@ -18,18 +18,18 @@
       "target": "api::experience.experience",
       "inversedBy": "experience_slots"
     },
-    "guide": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::guide.guide",
-      "inversedBy": "experience_slots"
-    },
     "start": {
       "type": "datetime",
       "required": true
     },
     "end": {
       "type": "datetime"
+    },
+    "guide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide.guide",
+      "inversedBy": "experience_slots"
     }
   }
 }

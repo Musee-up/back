@@ -1,12 +1,6 @@
 'use strict';
 
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
   register({ strapi }) {
     const { toEntityResponse } = strapi.plugin("graphql").service("format").returnTypes;
     const extensionService = strapi.plugin('graphql').service('extension');
@@ -25,7 +19,6 @@ module.exports = {
                     where: { id: root.id },
                     populate: { guide: true },
                   });
-                console.log(userData.guide)
                 return toEntityResponse(userData.guide, { args, resourceUID:"api::guide.guide" }) 
               },
             });
@@ -35,13 +28,33 @@ module.exports = {
     }));
   },
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap({ strapi }) {},
+  bootstrap({ strapi }) {
+    const io = require('socket.io')(strapi.server.httpServer, {
+      cors: {
+        origin: 'http://localhost:3000',
+      }
+    })
+    io.use((socket, next) => {
+      const username = socket.handshake.auth?.username;
+      if (!username) {
+        return next(new Error("invalid username"));
+      }
+      socket.username = username;
+      next();
+    });
+    io.on('connection', function(socket){
+      socket.broadcast.emit("user connected", {
+        userID: socket.id,
+        username: socket.username,
+      });
+      console.log("a user connected")
+      // socket.emit('hello', JSON.stringify({message: 'Hello user'}));
+      socket.on('disconnect', () => console.log('a user disconnected'));
+      socket.on('test', () => console.log('test received'));
+    });
+
+    strapi.io = io
+  },
   destroy({ strapi }) {},
+
 };
