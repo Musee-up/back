@@ -2,7 +2,7 @@
 
 module.exports = {
   register({ strapi }) {
-    const { toEntityResponse } = strapi.plugin("graphql").service("format").returnTypes;
+    const { toEntityResponse, toEntityResponseCollection } = strapi.plugin("graphql").service("format").returnTypes;
     const extensionService = strapi.plugin('graphql').service('extension');
     extensionService.use(({ nexus }) => ({
       types: [
@@ -19,11 +19,49 @@ module.exports = {
                     where: { id: root.id },
                     populate: { guide: true },
                   });
-                return toEntityResponse(userData.guide, { args, resourceUID:"api::guide.guide" }) 
+                return toEntityResponse(userData.guide, {
+                  args,
+                  resourceUID:"api::guide.guide"
+                }) 
               },
-            });
-          },
-        }),
+            })
+            t.field("rooms", {
+              type: "GuideEntityResponse",
+              resolve: async (root, args) => {
+                const userData = await strapi.db
+                  .query("plugin::users-permissions.user")
+                  .findOne({
+                    select: [],
+                    where: { id: root.id },
+                    populate: { guide: true },
+                  });
+                return toEntityResponse(userData.guide, {
+                  args,
+                  resourceUID:"api::room.room"
+                }) 
+              },
+            })
+
+
+            t.string("socketID")
+            t.field("friends", {
+              type: "UsersPermissionsUserEntityResponseCollection",
+              resolve: async (root, args) => {
+                const userData = await strapi.db
+                  .query("plugin::users-permissions.user")
+                  .findOne({
+                    select: [],
+                    where: { id: root.id },
+                    populate: { friends: true },
+                  });
+                return toEntityResponseCollection(userData.friends, {
+                  args,
+                  resourceUID: "plugin::users-permissions.user"
+                }) 
+              },
+            })
+          }
+        })
       ]
     }));
   },
@@ -34,23 +72,32 @@ module.exports = {
         origin: 'http://localhost:3000',
       }
     })
-    io.use((socket, next) => {
-      const username = socket.handshake.auth?.username;
-      if (!username) {
-        return next(new Error("invalid username"));
-      }
-      socket.username = username;
-      next();
-    });
+
+    // io.use((socket, next) => {
+    //   const username = socket.handshake.auth?.username;
+    //   if (!username) {
+    //     return next(new Error("invalid username"));
+    //   }
+    //   socket.username = username;
+    //   next();
+    // });
+
     io.on('connection', function(socket){
-      socket.broadcast.emit("user connected", {
-        userID: socket.id,
-        username: socket.username,
-      });
       console.log("a user connected")
-      // socket.emit('hello', JSON.stringify({message: 'Hello user'}));
+
+      const roomID = '1'
+      socket.join(roomID)
+      // socket.broadcast.emit("user connected", {
+      //   userID: socket.id,
+      //   username: socket.username,
+      // });
+      socket.on("private message", ({ content, to }) => {
+        socket.to(roomID).emit("private message", {
+          content,
+          from: socket.id,
+        });
+      });
       socket.on('disconnect', () => console.log('a user disconnected'));
-      socket.on('test', () => console.log('test received'));
     });
 
     strapi.io = io

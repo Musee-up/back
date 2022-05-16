@@ -67,6 +67,21 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::guide.guide"
+    },
+    "friends": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "socketID": {
+      "type": "string",
+      "unique": true
+    },
+    "rooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::room.room",
+      "mappedBy": "owners"
     }
   }
 }
