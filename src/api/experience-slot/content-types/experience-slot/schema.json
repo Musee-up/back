@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "experience": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::experience.experience",
-      "inversedBy": "experience_slots"
-    },
     "start": {
       "type": "datetime",
       "required": true
@@ -25,11 +19,23 @@
     "end": {
       "type": "datetime"
     },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "experience_slot"
+    },
     "guide": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::guide.guide",
-      "inversedBy": "experience_slots"
+      "inversedBy": "experienceSlots"
+    },
+    "experience": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::experience.experience",
+      "inversedBy": "experienceSlots"
     }
   }
 }

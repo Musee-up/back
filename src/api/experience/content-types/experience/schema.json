@@ -24,19 +24,6 @@
       },
       "type": "string"
     },
-    "experienceType": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "Balade Culturelle"
-      ],
-      "default": "Balade Culturelle",
-      "required": true
-    },
     "transportation": {
       "pluginOptions": {
         "i18n": {
@@ -145,7 +132,7 @@
       },
       "type": "string"
     },
-    "experience_slots": {
+    "experienceSlots": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::experience-slot.experience-slot",

@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "experience_slots": {
+    "experienceSlots": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::experience-slot.experience-slot",
@@ -23,6 +23,12 @@
       "relation": "oneToMany",
       "target": "api::experience.experience",
       "mappedBy": "guide"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "guide"
     }
   }
 }

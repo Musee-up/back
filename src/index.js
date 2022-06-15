@@ -26,7 +26,7 @@ module.exports = {
               },
             })
             t.field("rooms", {
-              type: "GuideEntityResponse",
+              type: "RoomEntityResponse",
               resolve: async (root, args) => {
                 const userData = await strapi.db
                   .query("plugin::users-permissions.user")
@@ -44,6 +44,22 @@ module.exports = {
 
 
             t.string("socketID")
+            t.field("bookings", {
+              type: "BookingEntityResponseCollection",
+              resolve: async (root, args) => {
+                const userData = await strapi.db
+                  .query("plugin::users-permissions.user")
+                  .findOne({
+                    select: [],
+                    where: { id: root.id },
+                    populate: { bookings: true },
+                  });
+                return toEntityResponseCollection(userData.bookings, {
+                  args,
+                  resourceUID: "api::booking.booking"
+                }) 
+              },
+            })
             t.field("friends", {
               type: "UsersPermissionsUserEntityResponseCollection",
               resolve: async (root, args) => {
