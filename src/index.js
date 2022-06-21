@@ -44,6 +44,11 @@ module.exports = {
 
 
             t.string("socketID")
+            t.string("firstname")
+            t.string("lastname")
+            t.string("phone")
+            t.string("location")
+            t.date("birthdate")
             t.field("bookings", {
               type: "BookingEntityResponseCollection",
               resolve: async (root, args) => {

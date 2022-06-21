@@ -99,6 +99,10 @@
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "user"
+    },
+    "location": {
+      "type": "string",
+      "unique": true
     }
   }
 }
