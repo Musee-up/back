@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
+    "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
@@ -17,10 +17,11 @@
     "@strapi/strapi": "4.1.7",
     "better-sqlite3": "7.4.6",
     "pg": "^8.7.3",
+    "sharp": "^0.30.6",
     "socket.io": "^4.5.0"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "ygarrot"
   },
   "strapi": {
     "uuid": "8486a162-130c-403c-a69d-f69aa131e037"
