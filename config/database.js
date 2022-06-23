@@ -13,7 +13,6 @@
 // // postgres://postgres:0000@localhost:5432/musee_up
 // // postgres://{user}:{password}@{hostname}:{port}/{database-name}
 const parse = require('pg-connection-string').parse;
-const config = parse(process.env.DATABASE_URL);
 
 console.log(config)
 module.exports = ({ env }) => ({
@@ -25,7 +24,7 @@ module.exports = ({ env }) => ({
       database: config.database || 'musee_up',
       user: config.user || 'postgres',
       password: config.password || '0000',
-      ssl: false
+      ssl: true
       // ssl: {
       //   rejectUnauthorized: false
       // },
