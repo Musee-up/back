@@ -24,10 +24,10 @@ module.exports = ({ env }) => ({
       database: config.database || 'musee_up',
       user: config.user || 'postgres',
       password: config.password || '0000',
-      ssl: true
-      // ssl: {
-      //   rejectUnauthorized: false
-      // },
+      // ssl: true
+      ssl: {
+        rejectUnauthorized: false
+      },
     },
     debug: false,
   },
