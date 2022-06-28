@@ -29,6 +29,39 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "guide"
+    },
+    "headline": {
+      "type": "string",
+      "unique": false
+    },
+    "description": {
+      "type": "string"
+    },
+    "background": {
+      "type": "text"
+    },
+    "languages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::language.language"
+    },
+    "interests": {
+      "type": "json"
+    },
+    "specialties": {
+      "type": "json"
+    },
+    "workExperiences": {
+      "type": "json"
+    },
+    "favorite_place": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::favorite-place.favorite-place",
+      "inversedBy": "guide"
+    },
+    "location": {
+      "type": "string"
     }
   }
 }

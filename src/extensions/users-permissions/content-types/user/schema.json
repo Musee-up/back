@@ -103,6 +103,13 @@
     "location": {
       "type": "string",
       "unique": true
+    },
+    "picture": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

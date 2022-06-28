@@ -9,6 +9,15 @@ module.exports = {
         nexus.extendType({
           type: 'UsersPermissionsMe',
           definition(t) {
+
+            // t.UploadFileEntityResponse("picture")
+            t.string("socketID")
+            t.string("firstname")
+            t.string("lastname")
+            t.string("phone")
+            t.string("location")
+            t.date("birthdate")
+
             t.field("guide", {
               type: "GuideEntityResponse",
               resolve: async (root, args) => {
@@ -33,7 +42,7 @@ module.exports = {
                   .findOne({
                     select: [],
                     where: { id: root.id },
-                    populate: { guide: true },
+                    populate: { rooms: true },
                   });
                 return toEntityResponse(userData.guide, {
                   args,
@@ -41,14 +50,6 @@ module.exports = {
                 }) 
               },
             })
-
-
-            t.string("socketID")
-            t.string("firstname")
-            t.string("lastname")
-            t.string("phone")
-            t.string("location")
-            t.date("birthdate")
             t.field("bookings", {
               type: "BookingEntityResponseCollection",
               resolve: async (root, args) => {
