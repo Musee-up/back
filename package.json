@@ -2,7 +2,7 @@
   "name": "back",
   "private": true,
   "version": "0.1.0",
-  "description": "Musée up backend",
+  "description": "A Strapi application",
   "scripts": {
     "dev": "strapi develop",
     "start": "strapi start",
