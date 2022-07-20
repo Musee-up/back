@@ -4,32 +4,32 @@
   "info": {
     "singularName": "booking",
     "pluralName": "bookings",
-    "displayName": "booking",
-    "description": ""
+    "displayName": "Booking"
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "experience_slot": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::experience-slot.experience-slot",
-      "inversedBy": "bookings"
-    },
-    "experience": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::experience.experience"
-    },
-    "size": {
-      "type": "integer"
-    },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
+      "inversedBy": "bookings"
+    },
+    "experience": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::experience.experience",
+      "inversedBy": "bookings"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "slot": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::slot.slot",
       "inversedBy": "bookings"
     }
   }

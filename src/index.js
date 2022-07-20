@@ -4,6 +4,20 @@ module.exports = {
   register({ strapi }) {
     const { toEntityResponse, toEntityResponseCollection } = strapi.plugin("graphql").service("format").returnTypes;
     const extensionService = strapi.plugin('graphql').service('extension');
+
+    // extensionService.use(({ nexus }) => ({
+    //   resolversConfig: {
+    //     'Mutation.createBooking': {
+    //       middleware: [
+    //         (resolve, ...args) => {
+    //           console.log("We're in a middleware");
+    //           return resolve(...args);
+    //         }
+    //       ]
+    //     }
+    //   }
+    // }))
+
     extensionService.use(({ nexus }) => ({
       types: [
         nexus.extendType({

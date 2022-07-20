@@ -94,12 +94,6 @@
       "type": "string",
       "unique": true
     },
-    "bookings": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::booking.booking",
-      "mappedBy": "user"
-    },
     "location": {
       "type": "string",
       "unique": true
@@ -110,6 +104,12 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "user"
     }
   }
 }

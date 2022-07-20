@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "slots",
+  "info": {
+    "singularName": "slot",
+    "pluralName": "slots",
+    "displayName": "Slot",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "start": {
+      "type": "datetime"
+    },
+    "end": {
+      "type": "datetime"
+    },
+    "experience": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::experience.experience",
+      "inversedBy": "slots"
+    },
+    "guide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide.guide",
+      "inversedBy": "slots"
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "slot"
+    }
+  }
+}
