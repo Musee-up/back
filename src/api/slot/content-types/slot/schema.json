@@ -35,6 +35,15 @@
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "slot"
+    },
+    "maxGroupSize": {
+      "type": "integer"
+    },
+    "currentGroupSize": {
+      "type": "integer"
+    },
+    "minGroupSize": {
+      "type": "integer"
     }
   }
 }
