@@ -1,6 +1,7 @@
 'use strict';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const getBookingSize = (booking) => Object.values(booking.quantityPerAge)?.map(quantity => quantity.quantity).reduce((a, b) => a + b, 0);
 
 module.exports = {
   register({ strapi }) {
@@ -13,27 +14,32 @@ module.exports = {
           middlewares: [
             async (resolve, ...args) => {
               const user = args[2].state.user
-              const query = args[1].data
+              const booking = args[1].data
 
-              const slot = await strapi.query("slot").findOne({
-                id: query.slot
+              const slotQuery = strapi.db.query("api::slot.slot")
+              const slot = await slotQuery.findOne({
+                id: booking.slot
               })
+              console.log('booking', booking)
+              console.log('slot', slot)
 
-              if (slot.maxGroupSize < slot.currentGroupSize + query.groupSize) {
+              const bookingSize = getBookingSize(booking)
+              if (slot.groupSize.max < slot.groupSize.current + bookingSize) {
                 throw new Error("Slot is full")
               }
-              slot.currentGroupSize += query.groupSize
 
-              await strapi.query("slot").update({
-                id: slot.id
-              }, slot)
+              slot.groupSize.current += bookingSize
 
+              await slotQuery.update({
+                where: {id: slot.id},
+                data: {...slot}
+              })
 
               await stripe.charges.create({
-                amount: 100,
+                amount: booking.amount,
                 currency: 'eur',
                 description: `Order ${new Date()} by ${user.id}`,
-                source: query.token.token.id,
+                source: booking.token.token.id,
               });
               return resolve(...args);
             }

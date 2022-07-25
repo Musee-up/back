@@ -38,6 +38,9 @@
     },
     "groupSize": {
       "type": "integer"
+    },
+    "quantityPerAge": {
+      "type": "json"
     }
   }
 }

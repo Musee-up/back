@@ -36,14 +36,11 @@
       "target": "api::booking.booking",
       "mappedBy": "slot"
     },
-    "maxGroupSize": {
-      "type": "integer"
+    "amountPerAge": {
+      "type": "json"
     },
-    "currentGroupSize": {
-      "type": "integer"
-    },
-    "minGroupSize": {
-      "type": "integer"
+    "groupSize": {
+      "type": "json"
     }
   }
 }
