@@ -154,6 +154,28 @@
       "relation": "oneToMany",
       "target": "api::slot.slot",
       "mappedBy": "experience"
+    },
+    "amountPerAge": {
+      "displayName": "amountPerAge",
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "amount-per-age.amount-per-age"
+    },
+    "discountPerGroupSize": {
+      "displayName": "discountPerGroupSize",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "discount-per-group-size.discount-per-group-size"
     }
   }
 }

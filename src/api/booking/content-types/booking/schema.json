@@ -41,6 +41,12 @@
     },
     "quantityPerAge": {
       "type": "json"
+    },
+    "guide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide.guide",
+      "inversedBy": "bookings"
     }
   }
 }
