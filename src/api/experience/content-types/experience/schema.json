@@ -176,6 +176,17 @@
         }
       },
       "component": "discount-per-group-size.discount-per-group-size"
+    },
+    "thresholds": {
+      "displayName": "thresholds",
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "thresholds.thresholds"
     }
   }
 }

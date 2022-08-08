@@ -20,8 +20,6 @@ module.exports = {
               const slot = await slotQuery.findOne({
                 id: booking.slot
               })
-              console.log('booking', booking)
-              console.log('slot', slot)
 
               const bookingSize = getBookingSize(booking)
               if (slot.groupSize.max < slot.groupSize.current + bookingSize) {

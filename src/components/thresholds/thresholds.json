@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_thresholds_thresholds",
+  "info": {
+    "displayName": "thresholds",
+    "icon": "circle"
+  },
+  "options": {},
+  "attributes": {
+    "groupSizeMin": {
+      "type": "integer"
+    },
+    "groupSizeMax": {
+      "type": "integer"
+    }
+  }
+}
