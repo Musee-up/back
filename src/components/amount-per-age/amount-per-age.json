@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_amount_per_age_amount_per_ages",
+  "info": {
+    "displayName": "amountPerAge",
+    "icon": "frown-open",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "baby": {
+      "type": "component",
+      "repeatable": false,
+      "component": "age-range.adulte"
+    },
+    "adult": {
+      "type": "component",
+      "repeatable": false,
+      "component": "age-range.adulte"
+    },
+    "children": {
+      "type": "component",
+      "repeatable": false,
+      "component": "age-range.adulte"
+    },
+    "teenager": {
+      "type": "component",
+      "repeatable": false,
+      "component": "age-range.adulte"
+    }
+  }
+}

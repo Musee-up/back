@@ -35,6 +35,12 @@
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "slot"
+    },
+    "amountPerAge": {
+      "type": "json"
+    },
+    "groupSize": {
+      "type": "json"
     }
   }
 }

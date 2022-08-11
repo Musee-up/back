@@ -1,45 +1,49 @@
-// 'use strict';
+'use strict';
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// module.exports = {
-//   // register({ strapi }) {
-//   // },
+const getBookingSize = (booking) => Object.values(booking.quantityPerAge)?.map(quantity => quantity.quantity).reduce((a, b) => a + b, 0);
 
-//   // bootstrap({ strapi }) {
-//   //   const io = require('socket.io')(strapi.server.httpServer, {
-//   //     cors: {
-//   //       origin: 'http://localhost:3000',
-//   //     }
-//   //   })
+module.exports = {
+  register({ strapi }) {
+    const { toEntityResponse, toEntityResponseCollection } = strapi.plugin("graphql").service("format").returnTypes;
+    const extensionService = strapi.plugin("graphql").service("extension");
 
-//   //   // io.use((socket, next) => {
-//   //   //   const username = socket.handshake.auth?.username;
-//   //   //   if (!username) {
-//   //   //     return next(new Error("invalid username"));
-//   //   //   }
-//   //   //   socket.username = username;
-//   //   //   next();
-//   //   // });
+    extensionService.use(({ nexus }) => ({
+      resolversConfig: {
+        'Mutation.createBooking': {
+          middlewares: [
+            async (resolve, ...args) => {
+              const user = args[2].state.user
+              const booking = args[1].data
 
-//   //   io.on('connection', function(socket){
-//   //     console.log("a user connected")
+              const slotQuery = strapi.db.query("api::slot.slot")
+              const slot = await slotQuery.findOne({
+                id: booking.slot
+              })
 
-//   //     const roomID = '1'
-//   //     socket.join(roomID)
-//   //     // socket.broadcast.emit("user connected", {
-//   //     //   userID: socket.id,
-//   //     //   username: socket.username,
-//   //     // });
-//   //     socket.on("private message", ({ content, to }) => {
-//   //       socket.to(roomID).emit("private message", {
-//   //         content,
-//   //         from: socket.id,
-//   //       });
-//   //     });
-//   //     socket.on('disconnect', () => console.log('a user disconnected'));
-//   //   });
+              const bookingSize = getBookingSize(booking)
+              if (slot.groupSize.max < slot.groupSize.current + bookingSize) {
+                throw new Error("Slot is full")
+              }
 
-//   //   strapi.io = io
-//   // },
-//   // destroy({ strapi }) {},
+              slot.groupSize.current += bookingSize
 
-// };
+              await slotQuery.update({
+                where: {id: slot.id},
+                data: {...slot}
+              })
+
+              await stripe.charges.create({
+                amount: booking.amount,
+                currency: 'eur',
+                description: `Order ${new Date()} by ${user.id}`,
+                source: booking.token.token.id,
+              });
+              return resolve(...args);
+            }
+          ]
+        }
+      }
+    }))
+  }
+};

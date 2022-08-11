@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_age_range_adultes",
+  "info": {
+    "displayName": "Amount",
+    "icon": "angry",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "amount": {
+      "type": "decimal"
+    }
+  }
+}

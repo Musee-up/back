@@ -4,7 +4,8 @@
   "info": {
     "singularName": "booking",
     "pluralName": "bookings",
-    "displayName": "Booking"
+    "displayName": "Booking",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -23,13 +24,28 @@
       "target": "api::experience.experience",
       "inversedBy": "bookings"
     },
-    "size": {
-      "type": "integer"
-    },
     "slot": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::slot.slot",
+      "inversedBy": "bookings"
+    },
+    "token": {
+      "type": "json"
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "groupSize": {
+      "type": "integer"
+    },
+    "quantityPerAge": {
+      "type": "json"
+    },
+    "guide": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide.guide",
       "inversedBy": "bookings"
     }
   }

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_discount_per_group_size_discount_per_group_sizes",
+  "info": {
+    "displayName": "discountPerGroupSize",
+    "icon": "address-book",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "discount": {
+      "type": "decimal"
+    },
+    "min": {
+      "type": "integer"
+    },
+    "max": {
+      "type": "integer"
+    }
+  }
+}
