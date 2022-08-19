@@ -99,17 +99,24 @@
       "unique": true
     },
     "picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "bookings": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::booking.booking",
       "mappedBy": "user"
+    },
+    "favorite": {
+      "displayName": "favorite",
+      "type": "component",
+      "repeatable": false,
+      "component": "favorite.favorite"
     }
   }
 }

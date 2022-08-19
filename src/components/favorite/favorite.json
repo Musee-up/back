@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_favorite_favorites",
+  "info": {
+    "displayName": "favorite",
+    "icon": "heart"
+  },
+  "options": {},
+  "attributes": {
+    "experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience.experience"
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::guide.guide"
+    }
+  }
+}
